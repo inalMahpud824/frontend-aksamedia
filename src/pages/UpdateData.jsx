@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const UpdateDataPage = () => {
   const [activityName, setActivityName] = useState("");
@@ -48,6 +49,8 @@ const UpdateDataPage = () => {
 
 
   return (
+    <>
+    <Navbar />
     <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-md mt-8">
       <h2 className="text-2xl font-bold mb-4">
         {id ? "Update Aktivitas" : "Tambah Aktivitas Baru"}
@@ -82,6 +85,7 @@ const UpdateDataPage = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

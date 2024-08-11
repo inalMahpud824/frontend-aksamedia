@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const AddDataPage = () => {
   const [activityName, setActivityName] = useState("");
@@ -34,6 +35,8 @@ const AddDataPage = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-md mt-8">
       <h2 className="text-2xl font-bold mb-4">Tambah Aktivitas Baru</h2>
       <form onSubmit={handleSubmit}>
@@ -66,6 +69,7 @@ const AddDataPage = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
