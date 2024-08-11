@@ -30,18 +30,18 @@ export default function LoginPage () {
     <>
       <div className="w-full min-h-screen flex justify-center items-center">
         <div className="p-2 w-[50%] bg-slate-500 rounded-xl text-white shadow-md">
-          <h2 className="text-2xl font-bold text-center py-5">Login</h2>
-          <form action="" onSubmit={handleSubmit} className="">
+          <h2 className="text-3xl font-bold text-center py-5">Login</h2>
+          <form action="" onSubmit={handleSubmit} className="flex flex-col justify-center w-full px-8">
             <InputComponent type={"text"} id={"username"}>
-              Username``
+              Username
             </InputComponent>
             <InputComponent type={"password"} id={"password"}>
-              Password{" "}
+              Password
             </InputComponent>
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="px-7 py-3 bg-blue-400 text-xl rounded-lg"
+                className="px-7 py-3 bg-blue-400 text-xl rounded-lg font-semibold outline-none hover:bg-blue-300"
               >
                 Login
               </button>

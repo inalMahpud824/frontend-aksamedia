@@ -1,14 +1,14 @@
 export default function InputComponent({ children, type, change, id }) {
   return (
-    <div className="mb-4 ">
-      <label className="mx-2" htmlFor={id}>{children}</label>
+      <div className="">
+      <label className="font-semibold text-xl" htmlFor={id}>{children}</label>
       <input
         name={id}
         onChange={change}
         type={type}
-        className="text-black p-3 outline-none w-[75%] rounded-md"
+        className="text-black p-3 outline-none w-full rounded-md mb-4"
         required
       />
-    </div>
+      </div>
   );
 }
