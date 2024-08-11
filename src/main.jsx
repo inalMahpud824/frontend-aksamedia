@@ -3,6 +3,8 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginPage from './pages/LoginPage.jsx';
 import App from './App.jsx';
+import AddDataPage from './pages/AddData.jsx';
+import UpdateDataPage from './pages/UpdateData.jsx';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,14 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  {
+    path: "/add",
+    element: <AddDataPage />,
+  },
+  {
+    path: "/update/:id",
+    element: <UpdateDataPage />,
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
