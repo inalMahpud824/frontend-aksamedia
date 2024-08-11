@@ -1,5 +1,5 @@
 import InputComponent from "../components/Input";
-import { users } from "../data/data";
+import { users } from "../data/dataLogin.js";
 
 
 export default function LoginPage () {
