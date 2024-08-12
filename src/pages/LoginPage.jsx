@@ -2,18 +2,22 @@ import { useEffect, useState } from "react";
 import InputComponent from "../components/Input";
 import { users } from "../data/dataLogin.js";
 
-
-export default function LoginPage () {
+export default function LoginPage() {
   const [usersData, setUsersData] = useState([]);
 
   useEffect(() => {
-    const storedUsers = localStorage.getItem("users")
-    if(!storedUsers){
-      localStorage.setItem("users", JSON.stringify(users));
-    }else{
-      setUsersData(JSON.parse(storedUsers));
+    let storedUsers = localStorage.getItem("users");
+    const token = localStorage.getItem("token");
+    if (token) {
+      window.location.href = "/";
     }
-  }, [])
+    if (!storedUsers) {
+      localStorage.setItem("users", JSON.stringify(users));
+      storedUsers = JSON.stringify(users);
+    }
+
+    setUsersData(JSON.parse(storedUsers));
+  }, []);
   const generateToken = (username) => {
     const token = btoa(`${username}:${new Date().getTime()}`);
     return token;
@@ -36,12 +40,11 @@ export default function LoginPage () {
     }
   };
 
-  console.log(users, 'dan', usersData)
 
   return (
     <>
       <div className="w-full min-h-screen bg-white flex justify-center items-center dark:bg-slate-800">
-        <div className="p-2 w-[50%] bg-slate-500 rounded-xl text-white shadow-md">
+        <div className="p-2 w-[80%] md:w-[65%] bg-slate-500 rounded-xl text-white shadow-md">
           <h2 className="font-bold text-center py-5 md:text-xl lg:text-2xl xl:text-3xl text-lg">
             Login
           </h2>
