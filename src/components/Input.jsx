@@ -1,7 +1,7 @@
 export default function InputComponent({ children, type, change, id }) {
   return (
       <div className="">
-      <label className="font-semibold text-xl" htmlFor={id}>{children}</label>
+      <label className="font-semibold text-sm md:text-md lg:text-xl xl:text-2xl" htmlFor={id}>{children}</label>
       <input
         name={id}
         onChange={change}

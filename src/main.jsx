@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import App from './App.jsx';
 import AddDataPage from './pages/AddData.jsx';
 import UpdateDataPage from './pages/UpdateData.jsx';
+import EditProfile from './pages/EditProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/update/:id",
     element: <UpdateDataPage />,
+  },
+  {
+    path: "/profile/edit",
+    element: <EditProfile />,
   }
 ]);
 
