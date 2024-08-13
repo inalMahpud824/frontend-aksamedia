@@ -7,7 +7,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     let storedUsers = localStorage.getItem("users");
-    const token = localStorage.getItem("token");
+    const token = window.localStorage.getItem("token");
     if (token) {
       window.location.href = "/";
     }
@@ -44,7 +44,7 @@ export default function LoginPage() {
   return (
     <>
       <div className="w-full min-h-screen bg-white flex justify-center items-center dark:bg-slate-800">
-        <div className="p-2 w-[80%] md:w-[65%] bg-slate-500 rounded-xl text-white shadow-md">
+        <div className="p-2 w-[80%] md:w-[65%] lg:w-[50%] xl:w-[40%] bg-slate-500 rounded-xl text-white shadow-md">
           <h2 className="font-bold text-center py-5 md:text-xl lg:text-2xl xl:text-3xl text-lg">
             Login
           </h2>

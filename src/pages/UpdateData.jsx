@@ -6,7 +6,8 @@ const UpdateDataPage = () => {
   const [activityName, setActivityName] = useState("");
   const [activities, setActivities] = useState([]);
   const navigate = useNavigate();
-  const { id } = useParams(); // Menangkap id dari URL
+  const { id } = useParams();
+  const [theme, setTheme] = useState("system");
 
   useEffect(() => {
     const storedActivities = localStorage.getItem("activities");
@@ -23,6 +24,12 @@ const UpdateDataPage = () => {
       if (activityToUpdate) {
         setActivityName(activityToUpdate.name);
       }
+    }
+    const theme = localStorage.getItem("theme");
+    if (!theme || theme === "system") {
+      localStorage.setItem("theme", "system");
+    } else {
+      setTheme(theme);
     }
   }, [id]);
 
@@ -50,7 +57,15 @@ const UpdateDataPage = () => {
   return (
     <>
       <Navbar />
-      <div className="wrapper p-7">
+      <div
+        className={`${
+          theme === "system"
+            ? "wrapper"
+            : theme === "dark"
+            ? "wrapper-dark"
+            : "wrapper-light"
+        } p-7`}
+      >
         <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-md mt-8">
           <h2 className="text-2xl font-bold mb-4">
             {id ? "Update Aktivitas" : "Tambah Aktivitas Baru"}

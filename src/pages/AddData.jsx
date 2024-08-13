@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 const AddDataPage = () => {
   const [activityName, setActivityName] = useState("");
   const [activities, setActivities] = useState([]);
-  // const [test, setTest] = useState([])
+  const [theme, setTheme] = useState("system");
 
   const navigate = useNavigate();
 
@@ -15,6 +15,12 @@ const AddDataPage = () => {
       localStorage.setItem("activities", JSON.stringify(activities));
     } else {
       setActivities( JSON.parse(storedActivities));
+    }
+    const theme = localStorage.getItem("theme");
+    if (!theme || theme === "system") {
+      localStorage.setItem("theme", "system");
+    } else {
+      setTheme(theme);
     }
   }, []);
   // console.log(test);
@@ -37,7 +43,15 @@ const AddDataPage = () => {
   return (
     <>
       <Navbar />
-      <div className="wrapper p-7">
+      <div
+        className={`${
+          theme === "system"
+            ? "wrapper"
+            : theme === "dark"
+            ? "wrapper-dark"
+            : "wrapper-light"
+        } p-7`}
+      >
         <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-md mt-8">
           <h2 className="text-2xl font-bold mb-4">Tambah Aktivitas Baru</h2>
           <form onSubmit={handleSubmit}>

@@ -6,15 +6,22 @@ export default function EditProfile() {
   const [currentUserName, setCurrentUserName] = useState("");
   const [usersData, setUsersData] = useState([]);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState("system");
 
   useEffect(() => {
     const dataUser = atob(window.localStorage.getItem("token"));
     const username = dataUser.split(":")[0];
     setCurrentUserName(username);
-    
+
     const storedUsers = localStorage.getItem("users");
     if (storedUsers) {
       setUsersData(JSON.parse(storedUsers));
+    }
+    const theme = localStorage.getItem("theme");
+    if (!theme || theme === "system") {
+      localStorage.setItem("theme", "system");
+    } else {
+      setTheme(theme);
     }
   }, []);
 
@@ -24,7 +31,9 @@ export default function EditProfile() {
 
     // Update username untuk user yang sedang login
     const updatedUsers = usersData.map((user) =>
-      user.username === currentUserName ? { ...user, username: profileName } : user
+      user.username === currentUserName
+        ? { ...user, username: profileName }
+        : user
     );
 
     // Simpan kembali data users ke localStorage
@@ -39,7 +48,15 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="wrapper">
+    <div
+      className={`wrapper ${
+        theme === "system"
+          ? "wrapper"
+          : theme === "dark"
+          ? "wrapper-dark"
+          : "wrapper-light"
+      } `}
+    >
       <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-md mt-8">
         <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit}>

@@ -5,7 +5,7 @@ const Navbar = () => {
   const [navbarClick, setNavbarClick] = useState(false);
 
   useEffect(() => {
-    const token = window.localStorage.getItem("token")
+    const token = localStorage.getItem("token")
     if (!token) {
       window.location.href = "/login"
     }
@@ -25,7 +25,6 @@ const Navbar = () => {
     <>
       <div className="bg-blue-700 flex justify-between items-center w-full gap-7 px-5 py-4 relative">
         <div className="">
-          <input type="checkbox" />
         </div>
         <div className="flex items-center gap-7">
           <Link to={"/profile/edit"}>

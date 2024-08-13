@@ -11,13 +11,34 @@ function App() {
   const [activities, setActivities] = useState([]);
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [search, setSearch] = useState("");
+  const [themeClick, setThemeClick] = useState(false);
+  const [theme, setTheme] = useState("system");
 
+  const handleThemeClick = () => {
+    setThemeClick(!themeClick);
+  };
+
+  const handleTheme = (tema) => {
+    setTheme(tema);
+    localStorage.setItem("theme", tema);
+  };
   useEffect(() => {
     const storedActivities = localStorage.getItem("activities");
+    
     if (storedActivities) {
       setActivities(JSON.parse(storedActivities));
     }
+    
   }, []);
+
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    if (!theme || theme === "system") {
+      localStorage.setItem("theme", "system");
+    } else {
+      setTheme(theme);
+    }
+  }, [theme])
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -32,7 +53,7 @@ function App() {
       activity.name.toLowerCase().includes(search.toLowerCase())
     );
     setFilteredActivities(filtered);
-  }, [location.search, activities]);
+  }, [location.search, activities, theme]);
 
   const totalPages = Math.ceil(filteredActivities.length / activitiesPerPage);
 
@@ -68,8 +89,52 @@ function App() {
 
   return (
     <>
-      <div className="wrapper pb-5">
-      <Navbar page={currentPage} />
+      <div
+        className={`${
+          theme === "system"
+            ? "wrapper"
+            : theme === "dark"
+            ? "wrapper-dark"
+            : "wrapper-light"
+        } pb-5 `}
+      >
+        <Navbar page={currentPage} />
+        <button
+          className="text-white p-2 md:p-4 bg-slate-500 hover:bg-slate-300"
+          onClick={() => handleThemeClick()}
+        >
+          Select Theme
+        </button>
+        <div
+          className={`bg-white shadow-md rounded-lg block absolute left-[0rem] md:left-[8rem] top-[7.5rem] md:top-2 overflow-hidden w-15 ${
+            themeClick ? "block" : "hidden"
+          }`}
+        >
+          <button
+            className={`dropdown-theme ${
+              theme === "system" ? "bg-slate-200" : ""
+            }`}
+            onClick={() => handleTheme("system")}
+          >
+            System
+          </button>
+          <button
+            className={`dropdown-theme ${
+              theme === "light" ? "bg-slate-200" : ""
+            }`}
+            onClick={() => handleTheme("light")}
+          >
+            light
+          </button>
+          <button
+            className={`dropdown-theme ${
+              theme === "dark" ? "bg-slate-200" : ""
+            }`}
+            onClick={() => handleTheme("dark")}
+          >
+            dark
+          </button>
+        </div>
         <div className="flex items-center justify-center ">
           <SearchBox page={currentPage} />
           <button
@@ -121,7 +186,13 @@ function App() {
           >
             Prev
           </button>
-          <span className="py-2 px-4 dark:text-white">
+          <span
+            className={`py-2 px-4 ${
+              theme === "system" || theme === "dark"
+                ? "text-white"
+                : "text-slate-700"
+            }`}
+          >
             {currentPage} / {totalPages}
           </span>
           <button

@@ -10,7 +10,18 @@
 .dropdown {
   @apply block font-semibold p-5 text-gray-700 hover:bg-slate-200 text-center cursor-pointer w-full;
 }
+.dropdown-theme {
+  @apply block font-semibold p-2 text-gray-700 hover:bg-slate-200 text-center cursor-pointer w-full md:p-3 md:p-5;
+}
 
 .wrapper {
   @apply w-full min-h-screen bg-white dark:bg-slate-800
+}
+
+.wrapper-light{
+  @apply w-full min-h-screen bg-white
+}
+
+.wrapper-dark{
+  @apply w-full min-h-screen bg-slate-800
 }
