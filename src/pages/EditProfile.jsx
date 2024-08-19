@@ -9,6 +9,10 @@ export default function EditProfile() {
   const [theme, setTheme] = useState("system");
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    }
     const dataUser = atob(window.localStorage.getItem("token"));
     const username = dataUser.split(":")[0];
     setCurrentUserName(username);
